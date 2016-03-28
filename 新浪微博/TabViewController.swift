@@ -16,6 +16,7 @@ class TabViewController: UITabBarController {
     let my=MyViewController()
     
     let btnBlog=UIButton()
+    let clearBtn=UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +31,20 @@ class TabViewController: UITabBarController {
         
         self.view.addSubview(btnBlog)
         btnBlog.setImage(UIImage(named: "blog"), forState: UIControlState.Normal)
-        btnBlog.addTarget(self, action: "releaseBlog", forControlEvents: UIControlEvents.TouchUpInside)
-//        btnBlog.setImage(UIImage(named: "tabbar_discover"), forState: UIControlState.Highlighted)
+        btnBlog.frame.size=btnBlog.currentImage!.size
         btnBlog.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view).offset(0)
             make.bottom.equalTo(self.view).inset(5)
         }
-        btnBlog.frame.size=btnBlog.currentImage!.size
+        
+        self.view.addSubview(clearBtn)
+        clearBtn.snp_makeConstraints { (make) -> Void in
+            make.width.equalTo(80)
+            make.height.equalTo(45)
+            make.centerX.equalTo(self.view).offset(0)
+            make.bottom.equalTo(self.view).inset(5)
+        }
+        clearBtn.addTarget(self, action: "releaseBlog", forControlEvents: UIControlEvents.TouchUpInside)
         
     }
     

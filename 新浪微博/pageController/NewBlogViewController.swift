@@ -15,12 +15,18 @@ class NewBlogViewController: UIViewController {
         self.navigationController?.navigationBar.translucent=false
         // Do any additional setup after loading the view.
         self.view.backgroundColor=UIColor.brownColor()
-        let btn=UIButton(frame: CGRectMake(100,100,50,50))
+        
+        let btn=UIButton()
+        self.view.addSubview(btn)
+        btn.snp_makeConstraints { (make) -> Void in
+            make.width.height.equalTo(100)
+            make.center.equalTo(self.view)
+        }
         btn.backgroundColor=UIColor.whiteColor()
         btn.setTitle("返回", forState: UIControlState.Normal)
         btn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         btn.addTarget(self, action: "back", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(btn)
+        
     }
 
     func back(){

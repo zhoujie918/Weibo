@@ -36,16 +36,21 @@ class WeiBoTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectio
         self.selectionStyle=UITableViewCellSelectionStyle.None  //使无法选择cell
         
         //顶部发帖人昵称
-        blogTopView.frame=CGRectMake(10, 10, self.frame.width-20, 50)
-        blogTopView.backgroundColor=UIColor.grayColor()
         self.addSubview(blogTopView)
+        blogTopView.addSubview(userName)
         blogTopView.addSubview(userImgView)
+//        blogTopView.frame=CGRectMake(10, 10, self.frame.width-20, 50)
+        blogTopView.snp_makeConstraints { (make) -> Void in
+            make.left.top.equalTo(self).inset(10)
+            make.width.equalTo(self.frame.width-20)
+            make.height.equalTo(50)
+        }
+        blogTopView.backgroundColor=UIColor.grayColor()
         userImgView.image=UIImage(named: "human")   //用户头像
         userImgView.frame=CGRectMake(1, 5, 40, 40)
         userImgView.layer.borderWidth=0.1
         userImgView.layer.cornerRadius=userImgView.frame.width/2
         userImgView.layer.masksToBounds=true        //隐藏边界
-        blogTopView.addSubview(userName)
         userName.frame=CGRectMake(userImgView.frame.width/2+30, 10, 100, 15)    //用户昵称
         userName.textColor=UIColor.orangeColor()
         userName.font=UIFont.systemFontOfSize(15)
@@ -53,22 +58,28 @@ class WeiBoTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectio
         //微博的发表日期
         blogTopView.addSubview(blogDate)
         blogDate.frame=CGRectMake(userImgView.frame.width/2+30, 27, 300, 15)
+//        blogTopView.snp_makeConstraints { (make) -> Void in
+//            make.top.equalTo(self).inset(10)
+//            make.left.equalTo(self).inset(10)
+//            make.width.equalTo(self.frame.width-20)
+//            make.height.equalTo(50)
+//        }
         blogDate.text="2-12 来自 海玲的iphone 客户端"
         blogDate.font=UIFont.systemFontOfSize(15)
         blogDate.textColor=UIColor.lightGrayColor()
         
         //微博内容
+        self.addSubview(blogContent)
         blogContent.frame=CGRectMake(10, 70, self.frame.width-20, 100)
 //        blogContent.layer.borderWidth=0.5
         blogContent.font=UIFont.boldSystemFontOfSize(16)
-        self.addSubview(blogContent)
         blogContent.numberOfLines=0     //不限制行数
         blogContent.sizeToFit()
 
         //评论数菜单
+        self.addSubview(blogBottomView)
         blogBottomView.frame=CGRectMake(0, self.frame.height-40, self.frame.width, 40)
         blogBottomView.backgroundColor=UIColor.purpleColor()
-        self.addSubview(blogBottomView)
         
         //转发、评论、点赞
         blogBottomView.addSubview(blogBottom1)
